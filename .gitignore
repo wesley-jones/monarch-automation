@@ -1,0 +1,8 @@
+session.json
+__pycache__/
+*.pyc
+*.pyo
+.mm/
+*.pickle
+.env
+.venv/
