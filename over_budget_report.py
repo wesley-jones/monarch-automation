@@ -166,17 +166,17 @@ def print_console_report(over_budget: list, threshold: float, month: str):
     print()
     print(f"  Monarch Money Over-Budget Report")
     print(f"  Month: {month}   |   Threshold: ${threshold:.0f}+")
-    print(f"  {'─' * width}")
+    print(f"  {'-' * width}")
 
     if not over_budget:
         print(f"  No categories are over budget by ${threshold:.0f} or more.")
-        print(f"  {'─' * width}")
+        print(f"  {'-' * width}")
         print()
         return
 
     # Header
     print(f"  {'Category':<28} {'Group':<18} {'Planned':>9} {'Actual':>9} {'Over By':>9}")
-    print(f"  {'─' * 28} {'─' * 18} {'─' * 9} {'─' * 9} {'─' * 9}")
+    print(f"  {'-' * 28} {'-' * 18} {'-' * 9} {'-' * 9} {'-' * 9}")
 
     for item in over_budget:
         cat = item["category"][:27]
@@ -188,7 +188,7 @@ def print_console_report(over_budget: list, threshold: float, month: str):
 
     total = sum(i["overage"] for i in over_budget)
     count = len(over_budget)
-    print(f"  {'─' * width}")
+    print(f"  {'-' * width}")
     print(f"  {count} categor{'y' if count == 1 else 'ies'} over budget.  "
           f"Total overage: ${total:.2f}")
     print()

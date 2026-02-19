@@ -1,1 +1,3 @@
-monarchmoney
+# The original 'monarchmoney' package is unmaintained and broken (HTTP 525).
+# This community fork fixes the api.monarch.com domain change and is a drop-in replacement.
+monarchmoneycommunity
