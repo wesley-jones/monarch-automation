@@ -16,6 +16,7 @@
 "use strict";
 
 const { execSync } = require("child_process");
+const fs = require("fs");
 const path = require("path");
 
 // ── Path resolution ───────────────────────────────────────────────────────────
@@ -33,6 +34,18 @@ const threshold = process.env.THRESHOLD || process.argv[2] || "50";
 // ── Python detection ──────────────────────────────────────────────────────────
 
 function findPython() {
+  // Prefer the project venv — it has all dependencies installed
+  const venvCandidates = [
+    path.join(PROJECT_ROOT, ".venv", "bin", "python"),      // Mac / Linux
+    path.join(PROJECT_ROOT, ".venv", "Scripts", "python"),  // Windows
+  ];
+  for (const candidate of venvCandidates) {
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+
+  // Fall back to system Python 3
   for (const candidate of ["python3", "python"]) {
     try {
       const out = execSync(`${candidate} --version`, {
@@ -47,8 +60,7 @@ function findPython() {
     }
   }
   throw new Error(
-    "Python 3 is not available on PATH. " +
-      "Install Python 3 and ensure it is accessible as 'python3' or 'python'."
+    "Python 3 not found. Create a venv at .venv/ or install Python 3 on PATH."
   );
 }
 
